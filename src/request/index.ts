@@ -18,8 +18,33 @@ const request = axios.create({
  * @param { Object } error 错误信息
  */
 const errorHandler = (error: AxiosError): AxiosError | Promise<AxiosError> => {
-  message.error(error.message)
-  return Promise.reject(error)
+  if(error.response == null) {
+    message.error(error.message)
+    return Promise.reject(error)
+  }
+  if (error.response.status == 401) {
+    storage.remove('token')
+    message.error(error.message)
+    router.push({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
+    return Promise.reject(error)
+  } else {
+    message.error(error.message)
+    return Promise.reject(error)
+  }
+  // } else if (error.response.status == 403) {    
+  //   router.push({ path: '/403', query: { redirect: router.currentRoute.value.fullPath } })
+  //   return Promise.reject(error)
+  // } else if (error.response.status == 404) {    
+  //   router.push({ path: '/404', query: { redirect: router.currentRoute.value.fullPath } })
+  //   return Promise.reject(error)
+  // } else if (error.response.status == 500) {    
+  //   router.push({ path: '/500', query: { redirect: router.currentRoute.value.fullPath } })
+  //   return Promise.reject(error)
+  // } else {
+  //   message.error(error.message)
+  //   return Promise.reject(error)
+  // }
+ 
 }
 
 /**
@@ -27,7 +52,7 @@ const errorHandler = (error: AxiosError): AxiosError | Promise<AxiosError> => {
  * @param { Object } config 配置参数
  */
 request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
-  config.headers['token'] = storage.get('token') || ''
+  config.headers['Authorization'] = storage.get('token') ? `Bearer ${storage.get('token')}` : ''
   return config
 }, errorHandler)
 
@@ -37,16 +62,17 @@ request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfi
  * @param { Object } response 返回的数据
  */
 request.interceptors.response.use((response: AxiosResponse): AxiosResponse | Promise<AxiosResponse> => {
-  if (response.data.code === 200) {
-    return response
-  } else if (response.data.code === -401) {
-    // 登录失效
-    storage.remove('token')
-    router.push({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
-    return Promise.reject(response)
-  } else {
-    return Promise.reject(response)
-  }
+  return response
+  // if (response.data.code === 200) {
+  //   return response
+  // } else if (response.data.code === -401) {
+  //   // 登录失效
+  //   storage.remove('token')
+  //   router.push({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
+  //   return Promise.reject(response)
+  // } else {
+  //   return Promise.reject(response)
+  // }
 }, errorHandler)
 
 export const globalAxios = {

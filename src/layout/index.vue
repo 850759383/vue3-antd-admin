@@ -52,8 +52,7 @@ export default defineComponent({
   }
   & .container {
     padding: 8px;
-    overflow-y: auto;
-    overflow-x: hidden;
+
   }
   & .container::-webkit-scrollbar {
     width: 6px;

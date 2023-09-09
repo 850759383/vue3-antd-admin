@@ -72,8 +72,8 @@ const user = {
       return new Promise((resolve, reject) => {
         login(params).then(e => {
           const data = e.data
-          storage.set('token', data.token)
-          context.commit('setToken', data.token)
+          storage.set('token', data.data)
+          context.commit('setToken', data.data)
           resolve(data)
         }).catch(err => {
           reject(err)
@@ -85,7 +85,7 @@ const user = {
     userInfo (context: ActionContext<UserState, AllState>) {
       return new Promise((resolve, reject) => {
         info().then(e => {
-          const info = e.data.info 
+          const info = e.data.data 
           context.commit('setInfo', info)
           resolve(e)
         }).catch(err => {

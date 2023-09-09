@@ -131,20 +131,20 @@ export default defineComponent({
 }
 </style>
 <style lang="scss">
-.tabs__view {
-  & .ant-tabs-tab {
-    user-select: none;
-    padding: 0 16px 0 0 !important;
-    & .ant-dropdown-trigger {
-      padding-left: 16px;
-    }
-  }
-  & .ant-tabs-bar {
-    margin: 0 0 8px 0;
-  }
-  & .ant-tabs-tab-active {
-    font-weight: normal;
-    border-bottom: 1px solid #f0f0f0 !important;
-  }
-}
+// .tabs__view {
+//   & .ant-tabs-tab {
+//     user-select: none;
+//     padding: 0 16px 0 0 !important;
+//     & .ant-dropdown-trigger {
+//       padding-left: 16px;
+//     }
+//   }
+//   & .ant-tabs-bar {
+//     margin: 0 0 8px 0;
+//   }
+//   & .ant-tabs-tab-active {
+//     font-weight: normal;
+//     border-bottom: 1px solid #f0f0f0 !important;
+//   }
+// }
 </style>

@@ -24,7 +24,7 @@ export const login = (data: LoginFrom): ConfigType<LoginSuccess> => {
  */
 export const info = (): ConfigType<UserInfo> => {
   return request({
-    url: '/info',
+    url: '/user',
     method: 'get'
   })
 }

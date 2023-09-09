@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import 'moment/dist/locale/zh-cn'
+// import 'moment/dist/locale/zh-cn'
 import { defineComponent } from 'vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 export default defineComponent({

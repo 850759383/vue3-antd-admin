@@ -3,12 +3,12 @@ import { UserState } from '@/store/modules/user'
 
 // 登录接口约束
 export interface LoginSuccess extends ResponseData {
-  token: string
+  data: string
 }
 
 // 用户信息接口约束
 export interface UserInfo extends ResponseData {
-  info: UserState
+  data: UserState
 }
 
 // 路由对象约束
